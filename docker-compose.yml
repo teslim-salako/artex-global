@@ -15,9 +15,8 @@ services:
     restart: unless-stopped
 
   artex:
-    # 이 포크가 릴리스 태그(v*)마다 GitHub Container Registry 에 발행하는 이미지입니다
-    # (.github/workflows/release.yml 의 docker 잡). 상류 autumn27/artex 는 Docker Hub 에서 내려갔습니다.
-    image: ghcr.io/jiwoochris/artex-global:${ARTEX_TAG:-latest}
+    # Build from source (Nomba security team fork — do not pull pre-built images from upstream).
+    build: .
     depends_on:
       postgres:
         condition: service_healthy
